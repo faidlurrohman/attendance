@@ -1,4 +1,4 @@
-import * as pg from "pg";
+const pg = require("pg");
 
 module.exports = {
   development: {
