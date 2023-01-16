@@ -37,10 +37,11 @@ exports.validateToken = async (req, res, next) => {
     if ([null, undefined, ""].includes(authorization)) {
       return onFailed(
         res,
-        {
-          message:
-            "Please login before continue eating some hamburger, cheers!!!",
-        },
+        [
+          {
+            msg: "Please login before continue eating some hamburger, cheers!!!",
+          },
+        ],
         401
       );
     }
