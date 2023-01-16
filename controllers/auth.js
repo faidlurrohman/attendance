@@ -35,7 +35,7 @@ exports.validateToken = async (req, res, next) => {
     const { authorization } = req.headers;
 
     if ([null, undefined, ""].includes(authorization)) {
-      return onError(
+      return onFailed(
         res,
         {
           message:
