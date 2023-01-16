@@ -35,10 +35,14 @@ exports.validateToken = async (req, res, next) => {
     const { authorization } = req.headers;
 
     if ([null, undefined, ""].includes(authorization)) {
-      return onError(res, {
-        message:
-          "Please login before continue eating some hamburger, cheers!!!",
-      });
+      return onError(
+        res,
+        {
+          message:
+            "Please login before continue eating some hamburger, cheers!!!",
+        },
+        401
+      );
     }
 
     await jwt.verify(authorization.split(" ").pop(), process.env.SECRET_KEY);
