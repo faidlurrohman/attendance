@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const { Op } = require("sequelize");
 const _user = require("../services/user");
 const { isValidPassword } = require("../utils/helper");
-const { onError, onSuccess, onFailed } = require("../utils/responses");
+const { onError, onSuccess } = require("../utils/responses");
 
 exports.login = async (req, res, next) => {
   try {
@@ -35,13 +35,12 @@ exports.validateToken = async (req, res, next) => {
     const { authorization } = req.headers;
 
     if ([null, undefined, ""].includes(authorization)) {
-      return onFailed(
+      return onError(
         res,
-        [
-          {
-            msg: "Please login before continue eating some hamburger, cheers!!!",
-          },
-        ],
+        {
+          message:
+            "Please login before continue eating some hamburger, cheers!!!",
+        },
         401
       );
     }
