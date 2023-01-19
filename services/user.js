@@ -37,6 +37,26 @@ exports.all = async () => {
           model: Company,
           as: "companies",
           through: { attributes: [] },
+          include: [
+            {
+              attributes: ["id", "name"],
+              model: Job,
+              as: "jobs",
+              through: { attributes: [] },
+              where: {
+                id: {
+                  [Op.any]: Sequelize.literal(
+                    `(
+                      ARRAY(
+                        SELECT "job_id" FROM "User_Jobs"
+                        JOIN "Users" ON "Users"."id"="User_Jobs"."user_id"
+                      )
+                    )`
+                  ),
+                },
+              },
+            },
+          ],
         },
         {
           attributes: ["id", "name"],
@@ -81,6 +101,26 @@ exports.single = async (query) => {
           model: Company,
           as: "companies",
           through: { attributes: [] },
+          include: [
+            {
+              attributes: ["id", "name"],
+              model: Job,
+              as: "jobs",
+              through: { attributes: [] },
+              where: {
+                id: {
+                  [Op.any]: Sequelize.literal(
+                    `(
+                      ARRAY(
+                        SELECT "job_id" FROM "User_Jobs"
+                        JOIN "Users" ON "Users"."id"="User_Jobs"."user_id"
+                      )
+                    )`
+                  ),
+                },
+              },
+            },
+          ],
         },
         {
           attributes: ["id", "name"],
