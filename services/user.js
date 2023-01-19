@@ -33,7 +33,7 @@ exports.all = async () => {
       ],
       include: [
         {
-          attributes: ["id", "name"],
+          attributes: ["id", "name", "address", "phone"],
           model: Company,
           as: "companies",
           through: { attributes: [] },
@@ -97,7 +97,7 @@ exports.single = async (query) => {
       ],
       include: [
         {
-          attributes: ["id", "name"],
+          attributes: ["id", "name", "address", "phone"],
           model: Company,
           as: "companies",
           through: { attributes: [] },
