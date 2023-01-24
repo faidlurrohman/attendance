@@ -27,6 +27,48 @@ exports.getAttendance = async (req, res) => {
   }
 };
 
+exports.getAttendanceByUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // check data exist
+    const result = await _attendance.related({ user_id: id });
+    if (!result) return onError(res, { message: "Attendance not found" });
+
+    onSuccess(res, result);
+  } catch (err) {
+    onError(res, err);
+  }
+};
+
+exports.getAttendanceByCompany = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // check data exist
+    const result = await _attendance.related({ company_id: id });
+    if (!result) return onError(res, { message: "Attendance not found" });
+
+    onSuccess(res, result);
+  } catch (err) {
+    onError(res, err);
+  }
+};
+
+exports.getAttendanceByJob = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // check data exist
+    const result = await _attendance.related({ job_id: id });
+    if (!result) return onError(res, { message: "Attendance not found" });
+
+    onSuccess(res, result);
+  } catch (err) {
+    onError(res, err);
+  }
+};
+
 exports.addAttendance = async (req, res) => {
   try {
     // validation input

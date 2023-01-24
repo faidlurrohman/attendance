@@ -7,6 +7,9 @@ const {
 } = require("../utils/validations/attendance");
 const {
   getAttendance,
+  getAttendanceByUser,
+  getAttendanceByCompany,
+  getAttendanceByJob,
   getAllAttendances,
   addAttendance,
   updateAttendance,
@@ -17,6 +20,9 @@ router.post("/", postValidation, addAttendance);
 router.put("/:id", id, putValidation, updateAttendance);
 router.delete("/:id", id, deleteAttendance);
 router.get("/:id", id, getAttendance);
+router.get("/user/:id", id, getAttendanceByUser);
+router.get("/company/:id", id, getAttendanceByCompany);
+router.get("/job/:id", id, getAttendanceByJob);
 router.get("/", getAllAttendances);
 
 module.exports = router;
