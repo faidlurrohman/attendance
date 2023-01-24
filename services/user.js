@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 const {
+  Attendance,
   Company,
   Job,
   User,
@@ -7,6 +8,30 @@ const {
   User_Jobs,
   Sequelize,
 } = require("../models");
+
+const currentDate = new Date();
+const startDay = new Date(
+  Date.UTC(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    currentDate.getDate(),
+    0,
+    0,
+    0,
+    0
+  )
+);
+const endDay = new Date(
+  Date.UTC(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    currentDate.getDate(),
+    23,
+    59,
+    59,
+    999
+  )
+);
 
 exports.all = async () => {
   try {
@@ -63,6 +88,36 @@ exports.all = async () => {
           model: Job,
           as: "jobs",
           through: { attributes: [] },
+        },
+        {
+          attributes: [
+            "id",
+            "attendance_in",
+            "attendance_out",
+            "latitude",
+            "longitude",
+          ],
+          model: Attendance,
+          as: "attendances",
+        },
+        {
+          attributes: [
+            "id",
+            "attendance_in",
+            "attendance_out",
+            "latitude",
+            "longitude",
+          ],
+          model: Attendance,
+          as: "current_attendance",
+          required: false,
+          where: {
+            [Op.and]: [
+              { attendance_in: { [Op.gt]: startDay } },
+              { attendance_in: { [Op.lte]: endDay } },
+              { attendance_out: { [Op.eq]: null } },
+            ],
+          },
         },
       ],
     });
@@ -127,6 +182,36 @@ exports.single = async (query) => {
           model: Job,
           as: "jobs",
           through: { attributes: [] },
+        },
+        {
+          attributes: [
+            "id",
+            "attendance_in",
+            "attendance_out",
+            "latitude",
+            "longitude",
+          ],
+          model: Attendance,
+          as: "attendances",
+        },
+        {
+          attributes: [
+            "id",
+            "attendance_in",
+            "attendance_out",
+            "latitude",
+            "longitude",
+          ],
+          model: Attendance,
+          as: "current_attendance",
+          required: false,
+          where: {
+            [Op.and]: [
+              { attendance_in: { [Op.gt]: startDay } },
+              { attendance_in: { [Op.lte]: endDay } },
+              { attendance_out: { [Op.eq]: null } },
+            ],
+          },
         },
       ],
       where: query,

@@ -21,6 +21,14 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: "job_id",
         as: "jobs",
       });
+      User.hasMany(models.Attendance, {
+        foreignKey: "user_id",
+        as: "attendances",
+      });
+      User.hasOne(models.Attendance, {
+        foreignKey: "user_id",
+        as: "current_attendance",
+      });
     }
   }
   User.init(
