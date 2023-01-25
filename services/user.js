@@ -61,12 +61,14 @@ exports.all = async () => {
           attributes: ["id", "name", "address", "phone"],
           model: Company,
           as: "companies",
+          required: false,
           through: { attributes: [] },
           include: [
             {
               attributes: ["id", "name"],
               model: Job,
               as: "jobs",
+              required: false,
               through: { attributes: [] },
               where: {
                 id: {
@@ -87,6 +89,7 @@ exports.all = async () => {
           attributes: ["id", "name"],
           model: Job,
           as: "jobs",
+          required: false,
           through: { attributes: [] },
         },
         {
@@ -99,6 +102,7 @@ exports.all = async () => {
           ],
           model: Attendance,
           as: "attendances",
+          required: false,
         },
         {
           attributes: [
@@ -155,12 +159,14 @@ exports.single = async (query) => {
           attributes: ["id", "name", "address", "phone"],
           model: Company,
           as: "companies",
+          required: false,
           through: { attributes: [] },
           include: [
             {
               attributes: ["id", "name"],
               model: Job,
               as: "jobs",
+              required: false,
               through: { attributes: [] },
               where: {
                 id: {
@@ -181,6 +187,7 @@ exports.single = async (query) => {
           attributes: ["id", "name"],
           model: Job,
           as: "jobs",
+          required: false,
           through: { attributes: [] },
         },
         {
@@ -193,6 +200,7 @@ exports.single = async (query) => {
           ],
           model: Attendance,
           as: "attendances",
+          required: false,
         },
         {
           attributes: [
